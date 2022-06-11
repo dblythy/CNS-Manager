@@ -20,7 +20,7 @@
           />
           <div class="row justify-center">
             <Button class="q-ma-xs" label="Login" type="submit" />
-            <Button class="q-ma-xs" label="Join as an CNS" @click="onJoin" />
+            <Button class="q-ma-xs" label="Join as an ANUM" @click="onJoin" />
           </div>
         </form>
       </q-card>
@@ -43,13 +43,18 @@ export default defineComponent({
   },
   methods: {
     async onSubmit() {
-      await this.makeRequest();
+      this.$validateFields('email', 'password');
+      await this.$resolve(
+        this.$ParseUser.logIn(this.user.email, this.user.password)
+      );
+      this.$router.push({ name: 'Dashboard' });
     },
     async onJoin() {
-      await this.makeRequest(true);
-    },
-    async makeRequest(signup) {
       this.$validateFields('email', 'password');
+      const user = new this.$Parse.User();
+      user.set('email', this.user.email);
+      user.set('password', this.user.password);
+      await this.$resolve(user.save());
       this.$router.push({ name: 'Dashboard' });
     },
   },
