@@ -1,0 +1,50 @@
+// app global css in SCSS form
+// app global css in SCSS form
+.q-field--outlined .q-field__control:hover:before {
+  border-color: rgba(0, 0, 0, 0.24) !important;
+}
+.bottom {
+  margin-top: auto;
+}
+html {
+  background: var(--q-primary) !important;
+}
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 0;
+  height: 0;
+}
+html,
+body,
+#q-app,
+.q-layout,
+.q-page-container {
+  width: 100vw !important;
+  max-height: 100vh !important;
+  /* mobile viewport bug fix */
+  height: -webkit-fill-available;
+}
+* {
+  touch-action: manipulation;
+}
+.square {
+  aspect-ratio: 1 !important;
+  font-size: 6em !important;
+}
+.icon {
+  font-size: 1.5em;
+  padding: 10px;
+  border-radius: 50%;
+}
+.icon-div {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  right: 20px;
+}
+.oncall {
+  outline: orange 1px solid;
+}
+.ripple {
+  cursor: pointer;
+}

@@ -1,0 +1,50 @@
+{
+  "name": "CNS-manager",
+  "version": "0.0.1",
+  "description": "A Quasar Project",
+  "productName": "CNS Manager",
+  "author": "dblythy <daniel-blyth@live.com.au>",
+  "private": true,
+  "scripts": {
+    "build": "quasar build && rm -rf build && mv dist/spa build",
+    "lint": "eslint --ext .js,.vue ./",
+    "lint:fix": "eslint  --fix --ext .js,.vue ./",
+    "prettier": "prettier --write '**/*.{ts,js,css,html,vue}' && npm run lint:fix",
+    "start": "quasar dev",
+    "test": "echo \"No test specified\" && exit 0"
+  },
+  "dependencies": {
+    "core-js": "^3.22.8",
+    "quasar": "^2.7.1",
+    "vue": "^3.2.37",
+    "VueHelper": "git+https://github.com/484-dev/VueHelper.git#master",
+    "parse": "3.4.2",
+    "@quasar/extras": "^1.14.0",
+    "vue-router": "^4.0.16"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.18.2",
+    "eslint": "^8.17.0",
+    "eslint-plugin-vue": "^9.1.1",
+    "eslint-webpack-plugin": "^3.1.1",
+    "eslint-config-prettier": "^8.5.0",
+    "prettier": "^2.6.2",
+    "@quasar/app-webpack": "^3.5.3"
+  },
+  "browserslist": [
+    "last 10 Chrome versions",
+    "last 10 Firefox versions",
+    "last 4 Edge versions",
+    "last 7 Safari versions",
+    "last 8 Android versions",
+    "last 8 ChromeAndroid versions",
+    "last 8 FirefoxAndroid versions",
+    "last 10 iOS versions",
+    "last 5 Opera versions"
+  ],
+  "engines": {
+    "node": ">= 12.22.1",
+    "npm": ">= 6.13.4",
+    "yarn": ">= 1.21.1"
+  }
+}
