@@ -4,8 +4,6 @@ import Input from '../components/Input.vue';
 import Button from '../components/Button.vue';
 import { Parse } from 'parse';
 export default boot(({ app, router }) => {
-  // for use inside Vue files (Options API) through this.$axios and this.$api
-
   app.component('Input', Input);
   app.component('Button', Button);
 
