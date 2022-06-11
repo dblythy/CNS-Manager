@@ -6,7 +6,7 @@
   "author": "dblythy <daniel-blyth@live.com.au>",
   "private": true,
   "scripts": {
-    "build": "quasar build && rm -rf build && mv dist/spa build",
+    "build": "quasar build",
     "lint": "eslint --ext .js,.vue ./",
     "lint:fix": "eslint  --fix --ext .js,.vue ./",
     "prettier": "prettier --write '**/*.{ts,js,css,html,vue}' && npm run lint:fix",
