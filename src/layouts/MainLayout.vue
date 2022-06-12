@@ -5,8 +5,6 @@
         <q-header class="text-white">
           <q-toolbar class="q-pl-lg">
             <q-toolbar-title> RMH CNS Portal </q-toolbar-title>
-            <q-space />
-            <q-btn flat round dense icon="info" @click="open = true" />
           </q-toolbar>
         </q-header>
         <q-drawer v-model="drawer" :width="250" :breakpoint="250" bordered>
@@ -35,16 +33,6 @@
           </q-list>
         </q-drawer>
       </template>
-      <q-btn
-        v-else
-        class="fixed-top-right"
-        flat
-        round
-        dense
-        icon="info"
-        style="z-index: 2000"
-        @click="open = true"
-      />
       <div class="col bg-red relative-position">
         <div :class="`bg-grey-1 absolute-top full-height`">
           <router-view v-slot="{ Component, route }">
@@ -53,13 +41,17 @@
                 <component
                   :is="Component"
                   :key="route.path"
+                  v-model:plan="plan"
                   :style="`${
                     $q.screen.lt.md
                       ? 'padding-bottom: calc(8vh + 2px);'
                       : 'height: 100% !important;'
                   } min-height: 100%`"
                   :user="user"
+                  :tab="tab"
                   :mobile="mobile"
+                  @change-tab="changeTab"
+                  @create-new="createNew"
                 />
               </keep-alive>
             </transition>
@@ -87,10 +79,10 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue';
-import { openURL } from 'quasar';
+import { defineComponent } from "vue";
+import { openURL } from "quasar";
 export default defineComponent({
-  name: 'MainLayout',
+  name: "MainLayout",
   beforeRouteUpdate(to, from, next) {
     this.checkRoute(to);
     next();
@@ -99,10 +91,11 @@ export default defineComponent({
     return {
       tab: 0,
       drawer: true,
-      direction: 'left',
+      direction: "left",
       open: false,
       openURL,
-      user: this.$getUser(),
+      user: this.$Parse.User.current(),
+      plan: this.$ParseVueObject("Plan"),
     };
   },
   computed: {
@@ -112,13 +105,13 @@ export default defineComponent({
   },
   watch: {
     tab(newVal, oldVal) {
-      this.direction = newVal < oldVal ? 'right' : 'left';
+      this.direction = newVal < oldVal ? "right" : "left";
     },
   },
   async mounted() {
     this.checkRoute();
     document.addEventListener(
-      'touchmove',
+      "touchmove",
       (event) => {
         if (event.scale !== 1) {
           event.preventDefault();
@@ -128,15 +121,26 @@ export default defineComponent({
     );
   },
   methods: {
-    changeTab(index) {
+    changeTab(index, query = {}) {
       this.tab = index;
-      const routes = ['Dashboard', 'Create', 'Profile'];
-      this.$router.push({ name: routes[index] });
+      const routes = ["Dashboard", "Create", "Profile"];
+      this.$router.push({ name: routes[index], query });
+      if (!query.plan) {
+        this.plan = this.$ParseVueObject("Plan");
+      }
     },
     checkRoute(route = this.$route) {
-      const names = ['Dashboard', 'Create', 'Profile'];
+      const names = ["Dashboard", "Create", "Profile"];
       if (names.includes(route.name)) {
         this.tab = names.indexOf(route.name);
+      }
+    },
+    async createNew(cns) {
+      if (cns) {
+        this.plan = cns;
+        this.changeTab(1, { plan: cns.id });
+      } else {
+        this.changeTab(1);
       }
     },
   },

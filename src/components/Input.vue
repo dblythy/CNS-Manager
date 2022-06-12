@@ -55,27 +55,27 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent } from "vue";
 export default defineComponent({
-  name: 'Input',
+  name: "Input",
   props: [
-    'backgroundColor',
-    'modelValue',
-    'nextInput',
-    'color',
-    'label',
-    'type',
-    'readonly',
-    'heavyTop',
-    'required',
-    'prefix',
-    'suffix',
-    'go',
-    'text',
-    'action',
-    'search',
+    "backgroundColor",
+    "modelValue",
+    "nextInput",
+    "color",
+    "label",
+    "type",
+    "readonly",
+    "heavyTop",
+    "required",
+    "prefix",
+    "suffix",
+    "go",
+    "text",
+    "action",
+    "search",
   ],
-  emits: ['update:modelValue', 'enter', 'go'],
+  emits: ["update:modelValue", "enter", "go"],
   data() {
     return {
       isPwd: false,
@@ -87,10 +87,10 @@ export default defineComponent({
         return this.modelValue?.toString() || this.text;
       },
       set(value) {
-        if (this.type === 'number') {
-          this.$emit('update:modelValue', Number(value));
+        if (this.type === "number") {
+          this.$emit("update:modelValue", Number(value));
         } else {
-          this.$emit('update:modelValue', value);
+          this.$emit("update:modelValue", value);
         }
       },
     },
@@ -100,10 +100,13 @@ export default defineComponent({
       this.hasError = !this.$refs.input.validate();
     },
     enterPressed(e) {
+      if (this.type === "textarea") {
+        return;
+      }
       this.$next(e, this.nextInput);
       this.validate();
       if (!this.hasError) {
-        this.$emit('enter');
+        this.$emit("enter");
       }
     },
     blurred() {

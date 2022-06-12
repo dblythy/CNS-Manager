@@ -2,7 +2,7 @@
   <q-page class="row flex flex-center bg-primary">
     <div class="col-10 col-md-6 q-gutter-y-md">
       <q-card class="q-pa-md text-center">
-        <div class="text-h4 q-pb-md">Welcome to RMH CNS Manager</div>
+        <div class="text-h4 q-pb-md">Welcome to RMH CNS Development Plan</div>
         <form class="q-gutter-md" @submit.prevent.stop="onSubmit()">
           <Input
             ref="email"
@@ -16,7 +16,6 @@
             v-model="user.password"
             type="password"
             label="Password"
-            next-input="firstName"
           />
           <div class="row justify-center">
             <Button class="q-ma-xs" label="Login" type="submit" />
@@ -29,33 +28,34 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent } from "vue";
 export default defineComponent({
-  name: 'Login',
+  name: "Login",
   data() {
     return {
-      tab: 'login',
+      tab: "login",
       user: {
-        email: '',
-        password: '',
+        email: "",
+        password: "",
       },
     };
   },
   methods: {
     async onSubmit() {
-      this.$validateFields('email', 'password');
+      this.$validateFields("email", "password");
       await this.$resolve(
         this.$ParseUser.logIn(this.user.email, this.user.password)
       );
-      this.$router.push({ name: 'Dashboard' });
+      this.$router.push({ name: "Dashboard" });
     },
     async onJoin() {
-      this.$validateFields('email', 'password');
+      this.$validateFields("email", "password");
       const user = new this.$Parse.User();
-      user.set('email', this.user.email);
-      user.set('password', this.user.password);
+      user.set("email", this.user.email.toLowerCase());
+      user.set("username", this.user.email.toLowerCase());
+      user.set("password", this.user.password);
       await this.$resolve(user.save());
-      this.$router.push({ name: 'Dashboard' });
+      this.$router.push({ name: "Dashboard" });
     },
   },
 });

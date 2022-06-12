@@ -1,11 +1,12 @@
 <template>
-  <router-view />
+  <div></div>
 </template>
 
 <script>
 import { defineComponent } from "vue";
-
 export default defineComponent({
-  name: "App",
+  mounted() {
+    this.$router.push({ name: "Login" });
+  },
 });
 </script>

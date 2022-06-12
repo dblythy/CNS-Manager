@@ -1,4 +1,4 @@
-# CNS Manager (CNS-manager)
+# CNS Development Plan (CNS-manager)
 
 A Quasar Project
 

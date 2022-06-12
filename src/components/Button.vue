@@ -24,28 +24,28 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent } from "vue";
 export default defineComponent({
-  name: 'Button',
-  props: ['go', 'back', 'bottom', 'label', 'color', 'textColor'],
-  emits: ['click'],
+  name: "Button",
+  props: ["go", "back", "bottom", "label", "color", "textColor"],
+  emits: ["click"],
   computed: {
     getColor() {
       if (this.textColor) {
         return this.textColor;
       }
       if (!this.color) {
-        return 'white';
+        return "white";
       }
       if (this.$contrast(this.color)) {
         return this.$contrast(this.color);
       }
-      if (!this.color.includes('#')) {
-        return 'white';
+      if (!this.color.includes("#")) {
+        return "white";
       }
-      return parseInt(this.color.replace('#', ''), 16) > 0xffffff / 2
-        ? 'black'
-        : 'white';
+      return parseInt(this.color.replace("#", ""), 16) > 0xffffff / 2
+        ? "black"
+        : "white";
     },
   },
 });
