@@ -42,6 +42,11 @@ export default defineComponent({
       },
     };
   },
+  updated() {
+    if (this.$Parse.User.current()) {
+      this.$router.push({ name: "Dashboard" });
+    }
+  },
   methods: {
     async onSubmit() {
       this.$validateFields("email", "password");
