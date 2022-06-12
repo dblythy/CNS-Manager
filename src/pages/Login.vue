@@ -43,9 +43,10 @@ export default defineComponent({
     };
   },
   updated() {
-    if (this.$Parse.User.current()) {
-      this.$router.push({ name: "Dashboard" });
-    }
+    this.checkRoute();
+  },
+  mounted() {
+    this.checkRoute();
   },
   methods: {
     async onSubmit() {
@@ -63,6 +64,11 @@ export default defineComponent({
       user.set("password", this.user.password);
       await this.$resolve(user.save());
       this.$router.push({ name: "Dashboard" });
+    },
+    checkRoute() {
+      if (this.$Parse.User.current()) {
+        this.$router.push({ name: "Dashboard" });
+      }
     },
   },
 });
