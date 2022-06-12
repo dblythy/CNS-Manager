@@ -367,7 +367,10 @@ export default defineComponent({
     },
     viewPlan() {
       window
-        .open(`http://localhost:8080/plan/${this._plan.id}`, "_blank")
+        .open(
+          `https://dblythy.github.io/CNS-Manager/#/plan/${this._plan.id}`,
+          "_blank"
+        )
         .focus();
     },
     backPressed() {
