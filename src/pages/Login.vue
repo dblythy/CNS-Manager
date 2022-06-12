@@ -50,6 +50,9 @@ export default defineComponent({
   },
   methods: {
     async onSubmit() {
+      if (this.checkRoute()) {
+        return;
+      }
       this.$validateFields("email", "password");
       await this.$resolve(
         this.$ParseUser.logIn(this.user.email, this.user.password)
@@ -68,6 +71,7 @@ export default defineComponent({
     checkRoute() {
       if (this.$Parse.User.current()) {
         this.$router.push({ name: "Dashboard" });
+        return true;
       }
     },
   },
