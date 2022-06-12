@@ -150,7 +150,7 @@
 <script>
 import { defineComponent } from "vue";
 import data from "./CreateDetails.js";
-import { date } from "quasar";
+import { date, useMeta } from "quasar";
 export default defineComponent({
   name: "Plan",
   data() {
@@ -173,6 +173,24 @@ export default defineComponent({
       return;
     }
     this.getData(plan);
+    useMeta(() => {
+      return {
+        title: `ICU Development Plan`,
+        meta: {
+          description: { name: "description", content: "Page 1" },
+          keywords: { name: "keywords", content: "Quasar website" },
+          equiv: {
+            "http-equiv": "Content-Type",
+            content: "text/html; charset=UTF-8",
+          },
+          // note: for Open Graph type metadata you will need to use SSR, to ensure page is rendered by the server
+          ogTitle: {
+            name: "og:title",
+            content: `RMH ICU development plan`,
+          },
+        },
+      };
+    });
   },
   methods: {
     async getData(plan) {
