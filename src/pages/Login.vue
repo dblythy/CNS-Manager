@@ -2,7 +2,9 @@
   <q-page class="row flex flex-center bg-primary">
     <div class="col-10 col-md-6 q-gutter-y-md">
       <q-card class="q-pa-md text-center">
-        <div class="text-h4 q-pb-md">Welcome to RMH CNS Development Plan</div>
+        <div class="text-h4 q-pb-md q-my-lg">
+          Welcome to RMH CNS Development Portal
+        </div>
         <form class="q-gutter-md" @submit.prevent.stop="onSubmit()">
           <Input
             ref="email"

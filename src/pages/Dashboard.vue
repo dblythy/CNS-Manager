@@ -39,7 +39,13 @@
     <div class="row items-center q-mt-lg">
       <div class="text-h3 text-weight-bold col">Your Development Plans</div>
       <q-space />
-      <q-btn flat icon="add" class="col-shrink" @click="$emit('createNew')" />
+      <q-btn
+        flat
+        icon="add"
+        round
+        class="bg-primary text-white"
+        @click="$emit('createNew')"
+      />
     </div>
     <div
       class="col row q-mb-md"
